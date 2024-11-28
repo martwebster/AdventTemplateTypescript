@@ -16,7 +16,7 @@ The following software is requrired:
 
 # Installation
 To get started:
-'''
+```
 pnpm i
-'''
+```
 
