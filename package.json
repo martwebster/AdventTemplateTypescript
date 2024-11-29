@@ -4,7 +4,6 @@
   "description": "Typescript version",
   "main": "dist/index.js",
   "scripts": {
-    "preinstall": "npx only-allow pnpm",
     "build": "tsc",
     "test": "npm run build && vitest"
   },
