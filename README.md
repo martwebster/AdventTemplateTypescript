@@ -14,7 +14,7 @@ Each day folder contains 3 files:
 - dayx.ts: contains the solution
 - dayx.txt: contains the sample data
 
-# Usage Code Spaces (Preferred)
+# Usage Codespaces (Easy)
 The template has been defined to be used with code spaces:
 1. Create a repository from the template (Click "Use this Template").
 3. Open the newly created repository using code space
