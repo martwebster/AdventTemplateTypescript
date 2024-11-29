@@ -1,7 +1,6 @@
 # Advent of code Template
 
-# Usage
-This template can be used to kick-start you journey in advent of code. It is a simple project set up to use Tyepscript, viTest and node. The template provide:
+This template can be used to kick-start you journey in advent of code. It is a simple project set up to use Tyepscript, viTest and node. The template provides:
 
 - Folder structure per day
 - Utility to load data from a file
@@ -12,12 +11,18 @@ Each day folder contains 3 files:
 - dayx.ts : contains the solution
 - dayx.txt : contains the sample data
 
-# Pre-requisites
+# Usage (outside codespaces)
 The following software is requrired:
 - pnpm
 - node
 - git
 - vscode (with vitest extension)
+
+# Code Spaces (Preferred)
+The template has been defined to be used with code spaces:
+1. Create repository from template (Click Use Template)
+2. Open repository using code space
+3. Accept request to install Extension ViTest
 
 # Installation
 To get started:
