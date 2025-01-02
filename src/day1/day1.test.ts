@@ -1,10 +1,7 @@
-
-import * as extensions from '../utility/extensions';
+import '../utility/extensions';
 import { test, describe, expect } from 'vitest'
 import { readTestData } from '../utility/fileHelper';
 import { exampleFunction } from './day1';
-
-extensions.apply();
 
 describe('day 1 - part1', () => {
     test('sample', () => {
