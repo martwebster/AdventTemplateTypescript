@@ -46,6 +46,11 @@ declare global {
          * Split the array multiple times
          */
         splitAll(item: T): Array<Array<T>>
+
+        /**
+         * Determine the indices of all items
+         */
+        indicesOf(item: T): number[]
         /**
          * Swap two elements in an array
          */
@@ -59,7 +64,15 @@ declare global {
          * - 2 -> 1
          * - 4 -> 2
          */
-        groupByCount() : Map<number, any>
+        groupByCount() : Map<any, number>
+
+        factory2D<T>(callback:(value: string, pos: Pos) => T ): Array<Array<T>>
+
+        toNumbers() : Array<number>
+
+        insertAt(val: number, index:number): Array<T>
+
+        splitAt(ranges: number[][]): Array<Array<T>>
     }
 }
 
@@ -120,6 +133,14 @@ Array.prototype.scanAll = function() {
                     x,
                     y 
                 })   
+            }
+        } else if (Array.isArray(this[y])){
+            const element = this[y] as Array<any>;
+            for (let x = 0; x < element.length; x++) {
+                positions.push( {
+                    x,
+                    y
+                })
             }
         }
     }
@@ -186,8 +207,8 @@ Array.prototype.swap = function (from: Pos, to: Pos ) : void {
     this[from.y][from.x] = temp;
 }
 
-Array.prototype.groupByCount = function () : Map<number, any> {
-    const groups = new Map<number, number>()
+Array.prototype.groupByCount = function () : Map<any, number> {
+    const groups = new Map<any, number>()
     for (const val of this) {
         const current = groups.get(val)
         if (current == undefined) {
@@ -197,4 +218,56 @@ Array.prototype.groupByCount = function () : Map<number, any> {
         }
     }
     return groups.sort((a, b) => a[0] - b[0])
+}
+
+Array.prototype.factory2D = function<T>(factory:(value: string, pos: Pos) => T ): Array<Array<T>>{
+    const all: T[][] = []
+    for (let y = 0; y < this.length; y++) {
+        const row = this[y];
+        const rowData: T[] = []
+        for (let x = 0; x < row.length; x++) {
+            const pos = {
+                x, y
+            }
+            rowData.push( factory(this[y][x], pos))
+        }
+        all.push(rowData)
+    }
+    return all
+}
+
+Array.prototype.toNumbers = function (): number[]{
+    return this.map (it => Number(it));
+}
+
+
+Array.prototype.insertAt = function (val: number, index:number): Array<unknown>{
+    return [...this.slice(0, index), val, ...this.slice(index)]
+}
+
+/**
+ * Determine the indices of all items
+ */
+Array.prototype.indicesOf = function (item: any): number[] {
+    const result : number[] = []
+    let position = 0;
+    let next = this.indexOf(item, position);
+    while (next!= -1){
+        result.push(next);
+        position = next +1;
+        next = this.indexOf(item, position);
+    }
+    return result;
+}
+
+Array.prototype.splitAt = function (ranges: number[][]): Array<Array<unknown>>{
+    const results: any[][] = []
+    for (const range of ranges){
+        const rangeBit : any[] = [];
+        for (let x = range[0]; x <= range[1]; x++) {
+            rangeBit.push(this[x])
+        }
+        results.push(rangeBit)
+    }
+    return results
 }
